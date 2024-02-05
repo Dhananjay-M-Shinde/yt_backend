@@ -35,6 +35,7 @@ then we need to create .prettierignore file in which we have to mention the file
 
 then we have to install nodemon using npm i -D nodemon
 nodemon basically restarts the server every time you made changes in any file.
+after installation make changes in package.json file add "dev": "nodemon src/index.js" in scripts
 
 here above in both installation we are using -D it denotes that we are installing devDependencies
 devDependencies are basically dependencies which are only needed in developement time. they make developement easier.
