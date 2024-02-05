@@ -1,0 +1,41 @@
+first create project folder.
+then npm init it will add package.json file to directory
+create readme.md file
+
+then create .env .gitignore and .env.sample file 
+// .env file used to store enviroment variable like port, hashcode and secure key and data's.
+// .gitignore used to add the file which we want not to be tracked by gitignore
+then create one public folder inside that create temp folder add .gitkeep file just because now git can track that folder because git won't track the folder which are empty.
+
+then create src folder which is main folder.
+
+inside src folder create below files and folders
+1 - app.js  application entry point
+2 - index.js  application entry point
+3 - constants.js
+4 - controllers - this folder contain all functionalities
+5 - db - all db connection created in this folder
+6 - model - database models are created in this folder
+7 - routes - this folder handles the routes
+8 - middlewares - some additional functionalities are written in this folder
+9 - utils - this is utilities folder utilities like checking for email validation, phone no. validations
+
+
+then use command npm i -D prettier to install prettier dependency
+this is use to standerdise the code writing like tab space, singleQuote
+after installtion we need to add .prettierrc file inside which 
+{
+    "singleQuote": false,
+    "bracketSpacing": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "semi": true
+}  we have to write this content
+then we need to create .prettierignore file in which we have to mention the files that prettier should not look into to avoid any messup like in .env, node_modules file
+
+then we have to install nodemon using npm i -D nodemon
+nodemon basically restarts the server every time you made changes in any file.
+
+here above in both installation we are using -D it denotes that we are installing devDependencies
+devDependencies are basically dependencies which are only needed in developement time. they make developement easier.
+
