@@ -1,0 +1,5 @@
+while connecting to database you should write the database connection code in db/index.js 
+then the function should be invoke in src/index.js file and also use promis to handle resolve and reject
+if database is connected successfully then in "then" we start the server using app.listen
+
+this is how we ensure that our application is connected to database and then only we start to listen to server.
