@@ -1,0 +1,15 @@
+we creates the schema in models folder only
+
+for user
+for video
+
+while writing schema should follow the given format
+we also have to use timestamps because it generate createdAt and updatedAt fields automatically
+and at the end we export the schema by below way
+export User = mongoose.model('User', userSchema)
+
+in these files only we can encrypt and decrypt the password field using bcrypt library
+while encryption we use pre hook avaiable in mongoose schema which runs just before we save the data to database
+
+while decrypting we create custome method usinf "methods" in schema like userSchema.methods.isPasseordCorrect
+
