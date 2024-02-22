@@ -12,7 +12,7 @@ then create src folder which is main folder.
 inside src folder create below files and folders
 1 - app.js  application entry point
 2 - index.js  application entry point
-3 - constants.js
+3 - constants.js By creating a separate constants file, you keep your codebase clean and organized. All the constants are stored in one place, making it easier to find and manage them. we can save status code, success msg in this file instead of hardcoding these values.
 4 - controllers - this folder contain all functionalities
 5 - db - all db connection created in this folder
 6 - model - database models are created in this folder

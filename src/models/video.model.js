@@ -39,6 +39,7 @@ const videoSchema = mongoose.Schema(
     {timestamps: true}
 )
 
+//mongoose-aggregate-pagination-v2 allows us to use aggregate pipeline features of mongodb
 videoSchema.plugin(mongooseAggregatePaginate)
 
 export const Video = mongoose.model('Video', videoSchema)
