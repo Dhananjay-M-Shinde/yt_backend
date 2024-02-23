@@ -1,0 +1,26 @@
+Here's what makes JWTs special:
+
+1. Compactness: JWTs are lightweight, making them ideal for use in web applications and mobile apps where bandwidth might be limited.
+
+2. Security: JWTs can be signed using a secret key or a public/private key pair. This signature ensures the information hasn't been tampered with during transmission.
+
+3. Self-containment: All the necessary information (claims) is embedded within the token itself, eliminating the need for additional database lookups.
+
+4. Flexibility: JWTs can be used for various purposes, including authentication, authorization, and data exchange.
+
+How JWTs work:
+
+Issuing: When a user successfully logs in, a server (issuer) creates a JWT containing claims about the user (e.g., username, roles, expiration time).
+Transmission: The server sends the JWT to the client (e.g., web browser, mobile app).
+Verification: When the client needs to access a protected resource, it sends the JWT to the server. The server verifies the signature to ensure the token's authenticity and retrieves the claims.
+Authorization: Based on the claims, the server decides whether to grant access to the requested resource.
+Benefits of using JWTs:
+
+Improved security: JWTs offer better security compared to traditional session-based authentication, especially when using HTTPS.
+Reduced server load: JWTs eliminate the need for constant communication with a central server, improving performance.
+Scalability: JWTs are well-suited for distributed systems and microservices architectures.
+Statelessness: JWTs make applications more stateless, simplifying deployment and scaling.
+However, it's important to remember:
+
+JWTs themselves are not encrypted. If confidentiality is crucial, use JWTs with encryption (JWE).
+JWTs can be susceptible to attacks if not implemented correctly. Securely store and transmit them.
