@@ -17,7 +17,7 @@ inside src folder create below files and folders
 5 - db - all db connection created in this folder
 6 - model - database models are created in this folder
 7 - routes - this folder handles the routes
-8 - middlewares - some additional functionalities are written in this folder
+8 - middlewares - some additional functionalities are written in this folder. this is like "jane se pahale mujhase milake jana".
 9 - utils - this is utilities folder utilities like checking for email validation, phone no. validations
 
 

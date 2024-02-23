@@ -1,0 +1,12 @@
+we are using multer to upload files in backend and we will upload it to cloudinary
+cloudinary is free to use
+
+we can directly upload the file to cloudinary instead of saving it temporary to our server. but we are saving it to just give it another chance incase the upload fails
+
+we will write the upload code for cloudinary in cloudinary.js file which we will define in utils because we are using cloudinary as a utility 
+you can get all required code api_key, secret_key by logging in to your cloudinary account
+once uploaded it return the response which contains many fields like url which we will need to store in database
+
+after that we will write the code to upload the file to our local server with the help of multer middleware which we will define in middleware folder.
+the code for the same you can get from npm multer
+it return the filepath which we can use later on to remove that file from our server
