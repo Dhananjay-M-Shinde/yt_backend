@@ -209,14 +209,14 @@ const refreshAccessToken = asyncHandler(async (req, res) =>{
             secure: true
         }
     
-        const {accessToken, newRefreshToken} = await generateAccessAndRefreshToken(user._id)
+        const {accessToken, refreshToken} = await generateAccessAndRefreshToken(user._id)
         return res
         .status(200)
         .cookie("accessToken", accessToken, options)
-        .cookie("refreshToken", newRefreshToken, options)
+        .cookie("refreshToken", refreshToken, options)
         .json(
             200,
-            {accessToken, refreshToken: newRefreshToken},
+            {accessToken, refreshToken},
             "Access token refreshed"
         )
     } catch (error) {
