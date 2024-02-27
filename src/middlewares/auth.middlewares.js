@@ -3,7 +3,7 @@ import {apiError} from "../utils/apiError.js"
 import jwt from "jsonwebtoken"
 import {User} from "../models/user.model.js"
 
-export const verifyJWT = asyncHandler(async (req, res, next) =>{
+const verifyJWT = asyncHandler(async (req, res, next) =>{
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer", "")
     
@@ -12,6 +12,7 @@ export const verifyJWT = asyncHandler(async (req, res, next) =>{
         }
     
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        console.log("this is ", decodedToken);
     
         const user = await User.findById(decodedToken?._id).select("-password -refreshToken")
     
