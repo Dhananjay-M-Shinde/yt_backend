@@ -216,9 +216,11 @@ const refreshAccessToken = asyncHandler(async (req, res) =>{
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(
-            200,
-            {accessToken, refreshToken},
-            "Access token refreshed"
+            new apiResponse(
+                200,
+                {accessToken, refreshToken},
+                "token refreshed successfully"
+            )
         )
     } catch (error) {
         throw new apiError(401, error?.message || "Invalid refresh token")
@@ -246,19 +248,21 @@ const changeCurrentPassword = asyncHandler(async(req, res) =>{
 const getCurrentUser = asyncHandler(async(req, res) =>{
     return res
     .status(200)
-    .json(200, req.user, "current user fetched successfully")
+    .json(new apiResponse(200, req.user, "current user fetched successfully"))
 })
 
 const updateAccountDetails = asyncHandler(async(req, res) =>{
+    console.log(req.body);
     const {fullName, email} = req.body
+    console.log(email, fullName);
     if(!fullName || !email){
         throw new apiError(400, "All fields are required")
     }
 
-    const user = User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
         req.user?._id,
         {$set: {
-            fullName,
+            fullName: fullName,
             email: email
         }
     },
@@ -315,7 +319,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) =>{
         req.user?._id,
         {
             $set: {
-                coverImage: avatar.url
+                coverImage: coverImage.url
             }
         },
         {new:true}
@@ -327,7 +331,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) =>{
 })
 
 const getUserChannelProfile = asyncHandler(async (req, res) =>{
-    const {userName} =req.params
+    const {userName} = req.params
 
     if(!userName?.trim()){
         throw new apiError(400, "username is missing")
@@ -358,10 +362,10 @@ const getUserChannelProfile = asyncHandler(async (req, res) =>{
         {
             $addFields: {
                 subscribersCount:{
-                    $size: "subscribersCount",
+                    $size: "$subscribers",
                 },
                 channelSubscribedToCount:{
-                    $size: "subscribedTo"
+                    $size: "$subscribedTo"
                 },
                 isSubscribed: {
                     $cond: {
@@ -392,7 +396,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) =>{
 
     return res
     .status(200)
-    .json(200, channel[0], "User channel fetched successfully!")
+    .json(new apiResponse(200, channel[0], "User channel fetched successfully!"))
 })
 
 const getWatchHistory = asyncHandler(async (req, res) =>{
@@ -415,18 +419,20 @@ const getWatchHistory = asyncHandler(async (req, res) =>{
                             localField: "owner",
                             foreignField: "_id",
                             as: "owner",
-                            pipeline: {
-                                $project: {
-                                    fullName: 1,
-                                    userName: 1,
-                                    avatar: 1
+                            pipeline: [
+                                {
+                                    $project: {
+                                        fullName: 1,
+                                        username: 1,
+                                        avatar: 1
+                                    }
                                 }
-                            }
+                            ]
                         }
                     },
                     {
-                        $addFields: {
-                            owner: {
+                        $addFields:{
+                            owner:{
                                 $first: "$owner"
                             }
                         }
@@ -435,10 +441,13 @@ const getWatchHistory = asyncHandler(async (req, res) =>{
             }
         }
     ])
+    
 
-    return res
+    res
     .status(200)
-    .json(new apiResponse(200, user[0].watchHistory), "Watch history fetched successfully")
+    .json(
+        new apiResponse(200, user[0].watchHistory, "watch history fetched successfully")
+    )
 })
 
 
